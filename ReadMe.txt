@@ -70,6 +70,14 @@
 
 	https://github.com/Angelo-Traverso/ST10081927_PROG7311_POE.git
 
+- REFERENCES -
+- I made use of bootstraps' website to help me with my styling for my UI and some components.
+	Link - https://getbootstrap.com/docs/5.3/components/alerts/
+
+- I also made use of ChatGPT to help refine some of my code and UI.
+
+
+
 
 
 
