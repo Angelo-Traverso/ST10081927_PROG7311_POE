@@ -15,33 +15,6 @@ namespace ProgPOE
     {
 
         /// <summary>
-        /// tabLogin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor tabLogin;
-
-        /// <summary>
-        /// tabTest1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor tabTest1;
-
-        /// <summary>
-        /// tabTest2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor tabTest2;
-
-        /// <summary>
         /// txtUsername control.
         /// </summary>
         /// <remarks>

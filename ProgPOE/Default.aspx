@@ -1,46 +1,26 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ProgPOE._Default" %>
+﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ProgPOE._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <main>
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-                <a runat="server" id="tabLogin" href="#lo   gIn" class="nav-link" aria-current="page" aria-controls="logIn" role="tab" data-toggle="tab">LOG IN</a>
-            </li>
-            <li class="nav-item">
-                <a runat="server" id="tabTest1" class="nav-link" href="#libraries" aria-controls="libraries" role="tab" data-toggle="tab">View Products</a>
-            </li>
-            <li class="nav-item">
-                <a runat="server" id="tabTest2" class="nav-link" href="#hosting" aria-controls="hosting" role="tab" data-toggle="tab">Add Farmer</a>
-            </li>
-        </ul>
 
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="logIn">
-                <h2>LOG IN</h2>
-                <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">Username</label>
-                    <asp:TextBox ID="txtUsername" type="text" class="form-control" placeholder="Username" runat="server" />
-                </div>
-                <div class="mb-3">
-                    <label for="formGroupExampleInput2" class="form-label">Password</label>
-                    <asp:TextBox ID="txtPassword" type="password" class="form-control" placeholder="Password" runat="server" />
-                </div>
-                <asp:Button ID="btnSubmit" runat="server" class="btn btn-primary" Text="Submit" OnClick="btnSubmit_Click" />
+    <link rel="stylesheet" href="Styles/Login.css" type="text/css" media="screen" />
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="fadeIn first">
+                <h2>Login</h2>
+                <p>Log in to your existing Farm Central account</p>
             </div>
-            
-            <div role="tabpanel" class="tab-pane" id="hosting">
-                <h2>Web Hosting</h2>
-                <!-- Content for Web Hosting tab -->
+            <asp:TextBox type="text" ID="txtUsername" runat="server" class="fadeIn second" name="login" placeholder="login"></asp:TextBox>
+            <asp:RequiredFieldValidator ControlToValidate="txtUsername" runat="server" ErrorMessage="Username is required" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+            <asp:TextBox type="password" ID="txtPassword" runat="server" class="fadeIn third" name="login" placeholder="password"></asp:TextBox>
+            <asp:RequiredFieldValidator ControlToValidate="txtPassword" runat="server" ErrorMessage="Password is required" Display="Dynamic" ForeColor="Red"> </asp:RequiredFieldValidator>
+            <asp:Button type="submit" runat="server" ID="btnSubmit" OnClick="btnSubmit_Click" class="shadow-lg fadeIn fourth" Text="Log In"></asp:Button>
+
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
             </div>
         </div>
-    </main>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.nav-link.disabled').on('click', function (e) {
-                e.preventDefault();
-            });
-        });
-    </script>
 </asp:Content>

@@ -15,6 +15,15 @@ namespace ProgPOE
     {
 
         /// <summary>
+        /// ddlFarmer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFarmer;
+
+        /// <summary>
         /// ddlProductType control.
         /// </summary>
         /// <remarks>
@@ -42,6 +51,15 @@ namespace ProgPOE
         protected global::System.Web.UI.WebControls.TextBox txtEndDate;
 
         /// <summary>
+        /// cvDates control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvDates;
+
+        /// <summary>
         /// btnFilter control.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,24 @@ namespace ProgPOE
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnFilter;
+
+        /// <summary>
+        /// btnReset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReset;
+
+        /// <summary>
+        /// lblNoProductsFound control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoProductsFound;
 
         /// <summary>
         /// gvProducts control.

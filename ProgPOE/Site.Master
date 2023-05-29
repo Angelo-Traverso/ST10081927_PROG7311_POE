@@ -6,13 +6,13 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - Farm Central</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -33,24 +33,44 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
+
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" runat="server" href="~/">Application name</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Farm Central</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/ViewProducts">View Products</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/AddFarmer">Add Farmer</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/AddProduct">Add Product</a></li>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <asp:Panel runat="server" ID="navViewProducts">
+                            <li class="nav-item" visible='<%# IsNavItemVisibleFarmer() %>'>
+                                <a class="nav-link" href="ViewProducts.aspx">View Products</a>
+                            </li>
+                        </asp:Panel>
+
+                        <asp:Panel runat="server" ID="navAddFarmer">
+                            <li class="nav-item" visible='<%# IsNavItemVisibleFarmer() %>'>
+                                <a class="nav-link" href="AddFarmer.aspx">Add Farmer</a>
+                            </li>
+                        </asp:Panel>
+
+                        <asp:Panel runat="server" ID="navAddProduct">
+                            <li class="nav-item" visible='<%# IsNavItemVisibleEmployee() %>'>
+                                <a class="nav-link" href="AddProduct.aspx">Add Product</a>
+                            </li>
+                        </asp:Panel>
+
+                        <li class="d-flex">
+                            <a class="nav-link" href="Default.aspx">Logout</a>
+                        </li>
                     </ul>
+                    <span class="navbar-text" runat="server" id="spanUsername" visible="false">Welcome
+                        <asp:Literal runat="server" ID="litUsername"></asp:Literal>
+                    </span>
                 </div>
             </div>
         </nav>
@@ -59,7 +79,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Farm Central</p>
             </footer>
         </div>
     </form>
@@ -68,3 +88,5 @@
     </asp:PlaceHolder>
 </body>
 </html>
+
+

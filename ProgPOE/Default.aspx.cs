@@ -1,65 +1,120 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.EnterpriseServices;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
+﻿#region File Header
+// // ----------------------------------------------------------------------------------------------------------- //
+// // Student Name:     Angelo Traverso
+// // Student Number:   ST10081927
+// // Project:          Programming POE Part 2
+// // Project Title:    Farm Central Prototype Website
+// // ----------------------------------------------------------------------------------------------------------- //
+#endregion
+using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace ProgPOE
 {
     public partial class _Default : Page
     {
+        /// <summary>
+        ///     DbController
+        /// </summary>
         private DBController _dbController = new DBController();
+        /// <summary>
+        ///     Enctyption Class to hash and validate passwords
+        /// </summary>
+        private Encryption encrypt = new Encryption();
+        /// <summary>
+        ///     username String
+        /// </summary>
         private string username = string.Empty;
+        /// <summary>
+        ///     password String
+        /// </summary>
         private string password = string.Empty;
-        protected void Page_Load(object sender, EventArgs e)
-        {   
-            // Simulate a user being signed in
-            bool isSignedIn = true;
 
-            // Update the authentication status and enable/disable tabs accordingly
-            /*if (isSignedIn)
+
+
+        // ----------------------------------------------------------------------------------------------------------- //
+        /// <summary>
+        ///     PageLoad Event for Default (Sign In)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
             {
-                tabLogin.Attributes["class"] = "nav-link";
-                tabTest1.Attributes["class"] = "nav-link";
-                tabTest2.Attributes["class"] = "nav-link";
+                txtUsername.Text = string.Empty;
+                txtPassword.Text = string.Empty;
+
+                // Removing all Session variables when user logs out
+                Session.RemoveAll();
             }
-            else
-            {*/
-            //{
-                tabLogin.Attributes["class"] = "nav-link disabled";
-                tabTest1.Attributes["class"] = "nav-link disabled";
-                tabTest2.Attributes["class"] = "nav-link disabled";
-           // }
         }
-        
+        // ----------------------------------------------------------------------------------------------------------- //
+        /// <summary>
+        ///     Button Click event for user "Login" clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             username = txtUsername.Text;
+            password = txtPassword.Text;
 
-            List<string> farmUsernames = new List<string>();
-            List<string> empUsernames = new List<string>();
-
-            _dbController.GetEmployeeUsername(empUsernames);
-            _dbController.GetFarmerUsername(farmUsernames);
+            // Getting user login credentials
+            Login_Credentials userLogin = _dbController.GetUserLoginCreds(username);
 
 
-
-            if (farmUsernames.Contains(username))
+            if (userLogin.user_username != null)
             {
-                Response.Redirect("AddProduct.aspx");
-            }
-            else if (empUsernames.Contains(username))
-            {
-                Response.Redirect("ViewProducts.aspx");
+                if (LoginValidation(password, userLogin))
+                {
+                    if (_dbController.GetUserType(userLogin.user_username).Equals("Employee"))
+                    {
+                        // if user type = employee, then add session variables and redirect user
+                        Session["LoggedInType"] = "Employee";
+                        Session["Username"] = userLogin.user_username;
+                        Response.Redirect("ViewProducts.aspx");
+
+                    }
+                    else
+                    {
+                        // if user type = employee, then add session variables and redirect user
+                        Session["LoggedInType"] = "Farmer";
+                        Session["Username"] = userLogin.user_username;
+                        Farmer farmer = _dbController.GetFarmerByUsername(username);
+                        // Setting another session key and value = object farmerobject
+                        Session["LoggedInObject"] = farmer;
+                        Response.Redirect("AddProduct.aspx");
+                    }
+                }
             }
             else
             {
+                // Clearing input boxes and displaying error if incorrect login details are provided
+                txtUsername.Text = "";
+                txtPassword.Text = "";
                 ClientScript.RegisterStartupScript(this.GetType(), "Invalid", "alert('" + "Incorrect Username or Password" + "');", true);
+
             }
+        }
+        // ----------------------------------------------------------------------------------------------------------- //
+        /// <summary>
+        ///     Method to validate a users' login credentials
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="loginCreds"></param>
+        /// <returns></returns>
+        private bool LoginValidation(string password, Login_Credentials loginCreds)
+        {
+            bool isFound = false;
+
+            if (encrypt.ValidatePassword(password, loginCreds.user_password))
+            {
+                isFound = true;
+            }
+
+            return isFound;
         }
     }
 }
+// --------------------------------- .....ooooo00000 END OF FILE 00000ooooo..... --------------------------------- //
