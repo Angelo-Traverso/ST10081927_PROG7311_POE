@@ -141,8 +141,8 @@ namespace ProgPOE
             ddlProductType.SelectedIndex = 0;
 
             // Clear all textboxes
-            txtStartDate.Text = "";
-            txtEndDate.Text = "";
+            txtStartDate.Text = string.Empty;
+            txtEndDate.Text = string.Empty;
             dbController.PopulateProductGridView(gvProducts);
         }
     }

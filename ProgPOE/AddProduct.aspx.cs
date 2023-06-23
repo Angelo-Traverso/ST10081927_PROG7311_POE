@@ -87,11 +87,11 @@ namespace ProgPOE
         /// </summary>
         private void ClearFields()
         {
-            txtProductCode.Text = "";
-            txtProductName.Text = "";
-            txtProductType.Text = "";
-            txtPrice.Text = "";
-            txtProductQuantity.Text = "";
+            txtProductCode.Text = string.Empty;
+            txtProductName.Text = string.Empty;
+            txtProductType.Text = string.Empty;
+            txtPrice.Text = string.Empty;
+            txtProductQuantity.Text = string.Empty;
         }
         #endregion
     }
